@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Games{% endblock %}
+
+{% block body %}
+    {{ game_info.type }}
+    {{ high_scores.score - high_scores.player}}
+{% endblock %}
