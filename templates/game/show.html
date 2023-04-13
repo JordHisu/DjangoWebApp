@@ -3,6 +3,19 @@
 {% block title %}Games{% endblock %}
 
 {% block body %}
-    {{ game_info.type }}
-    {{ high_scores.score - high_scores.player}}
+    <h2>{{ game.name }}</h2>
+    <p>{{ game.rules }}</p>
+
+    <h3>High Scores</h3>
+    {% if high_scores %}
+        <ul>
+        {% for score in high_scores %}
+            <li>{{ score.score }} - {{ score.player }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No scores yet!</p>
+    {% endif %}
+
+
 {% endblock %}

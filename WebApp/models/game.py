@@ -7,3 +7,5 @@ class Game(Model):
     rules = TextField(max_length=500, default="")
     created_at = DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.name} ({self.id})"

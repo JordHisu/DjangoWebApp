@@ -13,7 +13,7 @@ def list(request):
 
 def show(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
-    scores = GameScore.objects.filter(game_id=game_id).order_by('-score')
+    scores = GameScore.objects.filter(game_id=game_id).order_by('-score')[:5]
     context = {'game': game, 'high_scores': scores}
     return render(request, 'game/show.html', context)
 
