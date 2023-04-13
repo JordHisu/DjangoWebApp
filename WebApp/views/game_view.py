@@ -1,21 +1,19 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import View
 from ..models import Game, GameScore
 
 
-TEMPLATE_BASE_PATH = 'game/'
+ROOT_URI = 'game/'
 
 
-def list(self, request):
-    context = {'game_list': Game.objects.all()}
-    return render(request, self._build_path('list'), context)
+def list(request):
+    game_list = Game.objects.all().order_by('-created_at')
+    context = {'game_list': game_list}
+    return render(request, 'game/list.html', context)
 
-def view(self, request, game_id):
+
+def show(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     scores = GameScore.objects.filter(game_id=game_id).order_by('-score')
     context = {'game': game, 'high_scores': scores}
-    return render(request, self._build_path('view'), context)
-
-def _build_path(self, template_name: str) -> str:
-    return self.template_base_path + template_name + '.html'
+    return render(request, 'game/show.html', context)
 
