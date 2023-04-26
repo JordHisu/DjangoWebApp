@@ -1,14 +1,11 @@
 {% extends "base.html" %}
 
-{% block body_title %}Home{% endblock %}
+{% block body_title %}Register{% endblock %}
 
 {% block body %}
-
-    <h2>Please register yourself!</h2>
-
-    <form action={% url "player:create" %}>
+    <form method="post">
         {% csrf_token %}
+        {{ form.as_p }}
         <input type="submit" value="Register!">
     </form>
-
 {% endblock %}

@@ -6,6 +6,20 @@
     <h2>{{ game.name }}</h2>
     <p>{{ game.rules }}</p>
 
+    {% if result %}
+        {% if result.type == 'SUCCESS' %}
+            <p>Voce acertou o numero em {{ result.tries }} tentativas.</p>
+        {% else %}
+            <p>Voce errou! O numero era {{ result.random_number }}.</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Jogar">
+    </form>
+
     <h3>High Scores</h3>
     {% if high_scores %}
         <ul>

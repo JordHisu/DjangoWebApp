@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import game_view, home_view
+from .views import game_view, home_view, player_view
 
 game_patterns = (
     [
@@ -11,8 +11,16 @@ game_patterns = (
     'game'  # namespace
 )
 
+player_patterns = (
+    [
+        path('create', player_view.CreatePlayerView.as_view(), name='create'),
+    ],
+    'player'  # namespace
+)
+
 
 urlpatterns = [
     path(home_view.ROOT_URI, home_view.show),
     path(game_view.ROOT_URI, include(game_patterns)),
+    path(player_view.ROOT_URI, include(player_patterns)),
 ]

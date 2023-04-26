@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block body_title %}Games{% endblock %}
+
+{% block body %}
+
+    {% if request.session.user %}
+        <h2>Hello {{ request.session.user.name }}!</h2>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="let_go" value="Desistir!">
+        <input type="submit" name="try" value="Tentar!">
+    </form>
+
+{% endblock %}
