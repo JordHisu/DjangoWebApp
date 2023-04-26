@@ -1,32 +1,44 @@
-{% extends "base.html" %}
-
-{% block title %}Games{% endblock %}
+{% extends "game/base.html" %}
 
 {% block body %}
     <h2>{{ game.name }}</h2>
-    <p>{{ game.rules }}</p>
+    <h3>Olá {{ player.name }} ({{ player.nickname }})!</h3>
+    <p>As regras desse jogo são muito simples:</p>
+    <ul>
+        <li>Você terá que adivinhar o número em que estou pensando.</li>
+        <li>Você pode tentar quantas vezes quiser.</li>
+        <li>Em quanto MENOS tentativas você acertar, MAIOR será sua pontuação.</li>
+    </ul>
 
     {% if result %}
         {% if result.type == 'SUCCESS' %}
-            <p>Voce acertou o numero em {{ result.tries }} tentativas.</p>
+            <p>Você acertou o número em {{ result.tries }} tentativas!</p>
         {% else %}
-            <p>Voce errou! O numero era {{ result.random_number }}.</p>
+            <p>Você desistiu! Eu estava pensando no número {{ result.random_number }}.</p>
         {% endif %}
+    {% else %}
+        <p>Boa sorte!</p>
     {% endif %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Jogar">
-    </form>
+    <button onclick="location.href='{% url 'game:play' game.id %}'">
+        {% if not result %}Iniciar o jogo{% else %}Jogar novamente{% endif %}
+    </button>
 
+    <br><br>
     <h3>High Scores</h3>
     {% if high_scores %}
-        <ul>
-        {% for score in high_scores %}
-            <li>{{ score.score }} - {{ score.player }}</li>
-        {% endfor %}
-        </ul>
+        <table>
+            <tr>
+                <th>Player</th>
+                <th>Tentativas</th>
+            </tr>
+            {% for score in high_scores %}
+                <tr>
+                    <th>{{ score.player.nickname }}</th>
+                    <th>{{ score.score }}</th>
+                </tr>
+            {% endfor %}
+        </table>
     {% else %}
         <p>No scores yet!</p>
     {% endif %}

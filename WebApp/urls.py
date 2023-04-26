@@ -5,7 +5,7 @@ game_patterns = (
     [
         path('', game_view.list, name='list'),
         path('<int:game_id>/', game_view.show, name='show'),
-        # path('games/<int:game_id>/play', views.game_view),
+        path('<int:game_id>/play', game_view.play, name='play'),
         # path('games/<int:game_id>/scores'),
     ],
     'game'  # namespace

@@ -10,10 +10,11 @@ class PlayerForm(ModelForm):
             # "name": "Writer",
         }
         help_texts = {
-            # "name": "Some useful help text.",
+            "name": "Informe o seu nome completo",
+            "nickname": "Esta será a sua identificação única",
         }
         error_messages = {
-            "name": {
-                "max_length": "This name is too long.",
-            },
+            # "name": {
+            #     "min_length": "Este nome é muito curto",
+            # },
         }

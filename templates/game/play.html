@@ -1,17 +1,16 @@
-{% extends "base.html" %}
-
-{% block body_title %}Games{% endblock %}
+{% extends "game/base.html" %}
 
 {% block body %}
+    <h2>{{ game.name }}</h2>
+    <h3>Olá {{ player.name }} ({{ player.nickname }})!</h3>
 
-    {% if request.session.user %}
-        <h2>Hello {{ request.session.user.name }}!</h2>
-    {% endif %}
+    <p>Estou pensando em um número entre <b>1</b> e <b>9</b>.</p>
+    <p><b>Você é capaz de adivinhar em qual número estou pensando?</b></p>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" name="let_go" value="Desistir!">
+        <input type="submit" name="let_go" value="Desisto!">
         <input type="submit" name="try" value="Tentar!">
     </form>
 

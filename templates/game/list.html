@@ -1,12 +1,9 @@
-{% extends "base.html" %}
+{% extends "game/base.html" %}
 
-{% block body_title %}Games{% endblock %}
+{% block body_title %}Jogos{% endblock %}
 
 {% block body %}
-
-    {% if request.session.user %}
-        <h2>Hello {{ request.session.user.name }}!</h2>
-    {% endif %}
+    <h2>Olá {{ player.name }}!</h2>
 
     {% if game_list %}
         <ul>
