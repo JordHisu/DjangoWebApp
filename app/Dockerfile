@@ -6,18 +6,17 @@ COPY ./nginx.default /etc/nginx/sites-available/default
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && ln -sf /dev/stderr /var/log/nginx/error.log
 RUN mkdir -p /app
 RUN mkdir -p /app/pip_cache
-RUN mkdir -p /app/app
+RUN mkdir -p /var/data
 COPY start-server.sh /app
 COPY requirements.txt /app
 WORKDIR /
 RUN pip3 install --upgrade pip
 RUN pip3 install -r /app/requirements.txt --cache-dir /app/pip_cache
-RUN chown -R www-data:www-data /app
 COPY . /app
+RUN chown -R www-data:www-data /app
+RUN chown -R www-data:www-data /var
+RUN chown www-data:www-data /app/db.sqlite3
 EXPOSE 8020
 STOPSIGNAL SIGTERM
 CMD ["/app/start-server.sh"]
-#ENTRYPOINT ["python3"]
-
-#CMD ["manage.py", "runserver", "0.0.0.0:8080"]
 

@@ -54,7 +54,7 @@ def play(request, game_id):
     return render(request, 'game/play.html', context)
 
 
-@csrf_exempt
+
 def _build_play_post_context(tries, random_number, success):
     return {
         "result": {
