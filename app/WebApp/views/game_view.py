@@ -4,17 +4,19 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from ..forms.game_form import GuessGameForm
 from ..models import Game, GameScore, Player
+from django.views.decorators.csrf import csrf_exempt
+
 
 ROOT_URI = 'game/'
 
-
+@csrf_exempt
 def list(request):
     game_list = Game.objects.all().order_by('-created_at')
     player = get_object_or_404(Player, pk=request.session['user']['id'])
     context = {'game_list': game_list, "player": player}
     return render(request, 'game/list.html', context)
 
-
+@csrf_exempt
 def show(request, game_id, extra_context=None):
     game = get_object_or_404(Game, pk=game_id)
     player = get_object_or_404(Player, pk=request.session['user']['id'])
@@ -26,6 +28,7 @@ def show(request, game_id, extra_context=None):
     return render(request, 'game/show.html', context)
 
 
+@csrf_exempt
 def play(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
     player = get_object_or_404(Player, pk=request.session['user']['id'])
@@ -51,6 +54,7 @@ def play(request, game_id):
     return render(request, 'game/play.html', context)
 
 
+@csrf_exempt
 def _build_play_post_context(tries, random_number, success):
     return {
         "result": {
