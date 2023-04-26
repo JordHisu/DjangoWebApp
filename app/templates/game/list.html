@@ -3,7 +3,7 @@
 {% block body_title %}Jogos{% endblock %}
 
 {% block body %}
-    <h2>Olá {{ player.name }}!</h2>
+    <h2 class="greeting">Olá {{ player.name }}!</h2>
 
     {% if game_list %}
         <ul>
@@ -14,5 +14,56 @@
     {% else %}
         <p>No games are available.</p>
     {% endif %}
+{% endblock %}
+
+{% block style %}
+    <style>
+    .greeting {
+        font-family: Arial, sans-serif;
+        font-size: 28px;
+        color: #333;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        margin: 10px 0;
+        font-size: 20px;
+    }
+
+    a {
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a:hover {
+        color: #666;
+    }
+
+    p {
+        font-size: 20px;
+        margin: 10px 0;
+    }
+
+    .errorlist {
+        color: #f00;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .errorlist li {
+        margin: 5px 0;
+    }
+    </style>
 
 {% endblock %}

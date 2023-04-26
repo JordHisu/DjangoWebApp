@@ -1,10 +1,10 @@
 {% extends "game/base.html" %}
 
 {% block body %}
-    <h2>{{ game.name }}</h2>
-    <h3>Olá {{ player.name }} ({{ player.nickname }})!</h3>
-    <p>As regras desse jogo são muito simples:</p>
-    <ul>
+    <h2 style="font-family: Arial, sans-serif; font-size: 28px; color: #333; text-align: center;">{{ game.name }}</h2>
+    <h3 style="font-family: Arial, sans-serif; font-size: 22px; color: #333;">Olá {{ player.name }} ({{ player.nickname }})!</h3>
+    <p style="font-family: Arial, sans-serif; font-size: 18px; color: #666;">As regras desse jogo são muito simples:</p>
+    <ul style="font-family: Arial, sans-serif; font-size: 18px; color: #666;">
         <li>Você terá que adivinhar o número em que estou pensando.</li>
         <li>Você pode tentar quantas vezes quiser.</li>
         <li>Em quanto MENOS tentativas você acertar, MAIOR será sua pontuação.</li>
@@ -12,36 +12,34 @@
 
     {% if result %}
         {% if result.type == 'SUCCESS' %}
-            <p>Você acertou o número em {{ result.tries }} tentativas!</p>
+            <p style="font-family: Arial, sans-serif; font-size: 18px; color: #007f00;">Você acertou o número em {{ result.tries }} tentativas!</p>
         {% else %}
-            <p>Você desistiu! Eu estava pensando no número {{ result.random_number }}.</p>
+            <p style="font-family: Arial, sans-serif; font-size: 18px; color: #ff0000;">Você desistiu! Eu estava pensando no número {{ result.random_number }}.</p>
         {% endif %}
     {% else %}
-        <p>Boa sorte!</p>
+        <p style="font-family: Arial, sans-serif; font-size: 18px; color: #666;">Boa sorte!</p>
     {% endif %}
 
-    <button onclick="location.href='{% url 'game:play' game.id %}'">
+    <button style="font-family: Arial, sans-serif; font-size: 18px; color: #fff; background-color: #007f00; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;" onclick="location.href='{% url 'game:play' game.id %}'">
         {% if not result %}Iniciar o jogo{% else %}Jogar novamente{% endif %}
     </button>
 
     <br><br>
-    <h3>High Scores</h3>
+    <h3 style="font-family: Arial, sans-serif; font-size: 22px; color: #333;">High Scores</h3>
     {% if high_scores %}
-        <table>
-            <tr>
-                <th>Player</th>
-                <th>Tentativas</th>
+        <table style="font-family: Arial, sans-serif; font-size: 18px; color: #666; border-collapse: collapse; width: 100%;">
+            <tr style="background-color: #007f00; color: #fff;">
+                <th style="padding: 10px;">Player</th>
+                <th style="padding: 10px;">Tentativas</th>
             </tr>
             {% for score in high_scores %}
                 <tr>
-                    <th>{{ score.player.nickname }}</th>
-                    <th>{{ score.score }}</th>
+                    <th style="padding: 10px; border: 1px solid #ccc;">{{ score.player.nickname }}</th>
+                    <th style="padding: 10px; border: 1px solid #ccc;">{{ score.score }}</th>
                 </tr>
             {% endfor %}
         </table>
     {% else %}
-        <p>No scores yet!</p>
+        <p style="font-family: Arial, sans-serif; font-size: 18px; color: #666;">No scores yet!</p>
     {% endif %}
-
-
 {% endblock %}

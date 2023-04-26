@@ -15,8 +15,8 @@ class GuessGameForm(forms.Form):
             MinValueValidator(1)
         ],
         error_messages={
-            "max_value": "o valor maximo e 9",
-            "min_value": "o valor minimo e 1",
+            # "max_value": "o valor maximo e 9",
+            # "min_value": "o valor minimo e 1",
         },
         required=False
     )
