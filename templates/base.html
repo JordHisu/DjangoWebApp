@@ -1,0 +1,37 @@
+{% load i18n %}
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+<meta charset="utf-8">
+{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+    <link rel="stylesheet" href="{% static "css/pico.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/my_css.css" %}">
+    <title>{% block page_title %}Desenvolvimento Web{% endblock %}</title>
+    {% block style %}{% endblock %}
+</head>
+
+<body class="container">
+{#    <header></header>#}
+    <main>
+        <section id="batata">
+            <h1>{% block body_title %}{% endblock %}</h1>
+            {% block body %}{% endblock %}
+
+            <article>
+                <p>dsjkadjkas
+                djkashdasjkdh
+                dnlsadnlas</p>
+            </article>
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+                {% endfor %}
+            {% endif %}
+        </section>
+    </main>
+{#    <footer></footer>#}
+</body>
+</html>

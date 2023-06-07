@@ -9,3 +9,13 @@ services:
       - DJANGO_SUPERUSER_USERNAME=hisu
       - DJANGO_SUPERUSER_PASSWORD=hisu
       - DJANGO_SUPERUSER_EMAIL=hisu@mail.com
+    depends_on:
+      - db
+
+  db:
+    image: sqlite:latest
+    volumes:
+      - dbdata:/data
+
+volumes:
+  dbdata:
